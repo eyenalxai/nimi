@@ -1,7 +1,7 @@
 import "./globals.css"
 import { Providers } from "@/components/providers"
 import { Button } from "@/components/ui/button"
-import { fontMono, fontSans } from "@/lib/fonts"
+import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import type { Viewport } from "next"
 import Link from "next/link"
@@ -22,7 +22,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={cn("font-sans antialiased", fontSans.variable, fontMono.variable)}>
+			<body className={cn("font-sans", "antialiased", fontSans.variable)}>
 				<main className={cn("w-full", "flex", "justify-center", "mt-4")}>
 					<Providers attribute="class" defaultTheme="system" enableSystem>
 						<div className={cn("flex", "flex-col", "items-center", "space-y-6")}>
