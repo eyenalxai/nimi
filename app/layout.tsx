@@ -23,10 +23,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={cn("font-sans antialiased", fontSans.variable, fontMono.variable)}>
-				<main className={cn("w-full", "flex", "justify-center", "mt-12")}>
+				<main className={cn("w-full", "flex", "justify-center", "mt-4")}>
 					<Providers attribute="class" defaultTheme="system" enableSystem>
-						<div className={cn("flex", "flex-col", "items-center", "space-y-12")}>
-							<div className={cn("w-80", "flex", "flex-col", "justify-start", "space-y-4")}>
+						<div className={cn("flex", "flex-col", "items-center", "space-y-6")}>
+							<div className={cn("w-80", "flex", "flex-row", "justify-start", "space-x-2")}>
 								<Button asChild variant={"outline"} className={cn("lowercase", "text-lg", "w-36")}>
 									<Link href="/usernames">Usernames</Link>
 								</Button>

@@ -15,7 +15,7 @@ export const DataWrapper = ({ data, type, isFetching }: DataWrapperProps) => {
 	const queryClient = useQueryClient()
 
 	return (
-		<div className={cn("flex", "flex-col", "space-y-8")}>
+		<div className={cn("flex", "flex-col", "space-y-6")}>
 			<div className={cn("flex", "flex-col", "space-y-3", "w-80")}>
 				{data.map((value) => (
 					<Copyable
