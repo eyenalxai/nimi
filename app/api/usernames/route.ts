@@ -1,8 +1,8 @@
 import { generateUsername } from "@/lib/generate"
-import { NextResponse } from "next/server"
+import { respond } from "@/lib/respond"
 
 export async function GET(_request: Request): Promise<Response> {
 	const usernames = Array.from({ length: 10 }, () => generateUsername(3))
 
-	return NextResponse.json(usernames)
+	return await respond(usernames)
 }
