@@ -6,10 +6,11 @@ import { useQuery } from "@tanstack/react-query"
 
 type DataFetchProps = {
 	type: "fullnames" | "usernames"
+	host: string
 }
 
-export const DataFetch = ({ type }: DataFetchProps) => {
-	const queryFn = type === "fullnames" ? getFullnames : getUsernames
+export const DataFetch = ({ type, host }: DataFetchProps) => {
+	const queryFn = type === "fullnames" ? () => getFullnames(host) : () => getUsernames(host)
 	const { data, isFetching } = useQuery({ queryKey: [type], queryFn })
 
 	if (!data || isFetching) {
