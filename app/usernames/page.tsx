@@ -1,4 +1,4 @@
-import { Usernames } from "@/components/usernames"
+import { DataFetch } from "@/components/data-fetch"
 import { getUsernames } from "@/lib/fetch"
 import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query"
 
@@ -12,7 +12,7 @@ export default async function UsernamesPage() {
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>
-			<Usernames />
+			<DataFetch type="usernames" />
 		</HydrationBoundary>
 	)
 }
