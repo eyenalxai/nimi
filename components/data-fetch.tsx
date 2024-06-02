@@ -12,7 +12,7 @@ type DataFetchProps = {
 
 export const DataFetch = ({ type }: DataFetchProps) => {
 	const queryFn = type === "fullnames" ? getFullnames : getUsernames
-	const { data, isLoading } = useQuery({ queryKey: [type], queryFn })
+	const { data } = useQuery({ queryKey: [type], queryFn })
 	const queryClient = useQueryClient()
 
 	if (!data) {
