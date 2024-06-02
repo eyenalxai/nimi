@@ -7,9 +7,10 @@ import { CopyToClipboard } from "react-copy-to-clipboard"
 
 type CopyableProps = {
 	value: string
+	isFetching?: boolean
 }
 
-export const Copyable = ({ value }: CopyableProps) => {
+export const Copyable = ({ value, isFetching }: CopyableProps) => {
 	const [copied, setCopied] = useState(false)
 
 	useEffect(() => {
@@ -28,6 +29,7 @@ export const Copyable = ({ value }: CopyableProps) => {
 		<div key={value} className={cn("flex", "flex-row", "items-center", "space-x-4")}>
 			<CopyToClipboard text={value}>
 				<Button
+					disabled={isFetching}
 					className={cn(
 						copied && [
 							["dark:bg-emerald-600", "dark:hover:bg-emerald-700"],
@@ -41,7 +43,7 @@ export const Copyable = ({ value }: CopyableProps) => {
 					copy
 				</Button>
 			</CopyToClipboard>
-			<p className={cn("text-xl", "lowercase")}>{value}</p>
+			<p className={cn("text-xl", "lowercase")}>{isFetching ? "..." : value}</p>
 		</div>
 	)
 }
