@@ -1,5 +1,4 @@
 import "./globals.css"
-import { LinkButton } from "@/components/link-button"
 import { Providers } from "@/components/providers"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
@@ -24,13 +23,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 			<body className={cn("font-sans", "antialiased", fontSans.variable)}>
 				<main className={cn("w-full", "flex", "justify-center", "mt-4")}>
 					<Providers attribute="class" defaultTheme="system" enableSystem>
-						<div className={cn("flex", "flex-col", "items-center", "space-y-6")}>
-							<div className={cn("w-80", "flex", "flex-row", "justify-start", "space-x-2")}>
-								<LinkButton path={"usernames"} />
-								<LinkButton path={"fullnames"} />
-							</div>
-							{children}
-						</div>
+						{children}
 					</Providers>
 				</main>
 			</body>
