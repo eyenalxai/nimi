@@ -2,10 +2,13 @@ import { syllables } from "@/lib/syllables"
 
 const capitalize = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1)
 
+const generateRandomNumber = (min: number, max: number) =>
+	min + Math.floor((crypto.getRandomValues(new Uint32Array(1))[0] / (0xffffffff + 1)) * (max - min + 1))
+
 const generateString = (minLength: number, maxLength: number = minLength): string =>
 	Array.from(
-		{ length: Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength },
-		() => syllables[Math.floor(Math.random() * syllables.length)]
+		{ length: generateRandomNumber(minLength, maxLength) },
+		() => syllables[generateRandomNumber(0, syllables.length - 1)]
 	).join("")
 
 export const generateUsername = (minLength: number): string => generateString(minLength)
