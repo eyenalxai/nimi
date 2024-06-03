@@ -1,17 +1,8 @@
-import { DataFetch } from "@/components/data-fetch"
-import { getUsernames } from "@/lib/fetch"
-import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query"
+import { DataDisplay } from "@/components/ui/data-display"
+import { getCachedUsernames } from "@/lib/cached"
 
 export default async function UsernamesPage() {
-	const queryClient = new QueryClient()
-	await queryClient.prefetchQuery({
-		queryKey: ["usernames"],
-		queryFn: getUsernames
-	})
+	const usernames = await getCachedUsernames()
 
-	return (
-		<HydrationBoundary state={dehydrate(queryClient)}>
-			<DataFetch type="usernames" />
-		</HydrationBoundary>
-	)
+	return <DataDisplay values={usernames} type={"usernames"} />
 }

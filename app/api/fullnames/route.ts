@@ -1,8 +1,8 @@
-import { generateFullName } from "@/lib/generate"
+import { getFullnames } from "@/lib/get"
 import { respond } from "@/lib/respond"
 
 export async function GET(_request: Request): Promise<Response> {
-	const fullnames = Array.from({ length: 10 }, () => generateFullName(2, 3))
+	const fullnames = await getFullnames()
 
 	return await respond(fullnames)
 }

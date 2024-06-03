@@ -1,11 +1,7 @@
 {
 	"$schema": "https://json.schemastore.org/eslintrc",
 	"root": true,
-	"extends": [
-		"next/core-web-vitals",
-		"plugin:tailwindcss/recommended",
-		"plugin:@tanstack/eslint-plugin-query/recommended"
-	],
+	"extends": ["next/core-web-vitals", "plugin:tailwindcss/recommended"],
 	"plugins": ["tailwindcss"],
 	"rules": {
 		"tailwindcss/no-custom-classname": "off"
