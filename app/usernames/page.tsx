@@ -1,3 +1,5 @@
+export const revalidate = 600
+
 import { DataDisplay } from "@/components/ui/data-display"
 import { getCachedUsernames } from "@/lib/cached"
 
