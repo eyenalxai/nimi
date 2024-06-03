@@ -10,7 +10,9 @@ type LinkButtonProps = {
 export const LinkButton = ({ path, active }: LinkButtonProps) => {
 	return (
 		<Button asChild variant={active ? "default" : "outline"} className={cn("lowercase", "text-lg", "w-36")}>
-			<Link href={`/${path}`}>{capitalize(path)}</Link>
+			<Link href={`/${path}`} prefetch>
+				{capitalize(path)}
+			</Link>
 		</Button>
 	)
 }
