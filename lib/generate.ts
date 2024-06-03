@@ -13,8 +13,5 @@ const generateString = (minLength: number, maxLength: number = minLength): strin
 
 export const generateUsername = (minLength: number): string => generateString(minLength)
 
-export const generateFullName = (minLength: number, maxLength: number): string => {
-	const firstName = capitalize(generateString(minLength, maxLength))
-	const lastName = capitalize(generateString(minLength, maxLength))
-	return `${firstName} ${lastName}`
-}
+export const generateFullName = (minLength: number, maxLength: number): string =>
+	`${capitalize(generateString(minLength, maxLength))} ${capitalize(generateString(minLength, maxLength))}`
