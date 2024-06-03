@@ -1,6 +1,5 @@
 import { syllables } from "@/lib/syllables"
-
-const capitalize = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1)
+import { capitalize } from "@/lib/utils"
 
 const generateRandomNumber = (min: number, max: number) =>
 	min + Math.floor((crypto.getRandomValues(new Uint32Array(1))[0] / (0xffffffff + 1)) * (max - min + 1))

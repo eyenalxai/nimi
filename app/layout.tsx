@@ -1,10 +1,9 @@
 import "./globals.css"
+import { LinkButton } from "@/components/link-button"
 import { Providers } from "@/components/providers"
-import { Button } from "@/components/ui/button"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import type { Viewport } from "next"
-import Link from "next/link"
 import type { ReactNode } from "react"
 
 export const metadata = {
@@ -27,12 +26,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 					<Providers attribute="class" defaultTheme="system" enableSystem>
 						<div className={cn("flex", "flex-col", "items-center", "space-y-6")}>
 							<div className={cn("w-80", "flex", "flex-row", "justify-start", "space-x-2")}>
-								<Button asChild variant={"outline"} className={cn("lowercase", "text-lg", "w-36")}>
-									<Link href="/usernames">Usernames</Link>
-								</Button>
-								<Button asChild variant={"outline"} className={cn("lowercase", "text-lg", "w-36")}>
-									<Link href="/fullnames">Fullnames</Link>
-								</Button>
+								<LinkButton path={"usernames"} />
+								<LinkButton path={"fullnames"} />
 							</div>
 							{children}
 						</div>
