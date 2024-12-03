@@ -3,43 +3,70 @@ import { syllables } from "@/lib/syllables"
 export const capitalize = (str: string) =>
 	str.charAt(0).toUpperCase() + str.slice(1)
 
-const generateRandomNumber = (min: number, max: number) =>
+type GenerateRandomNumberOptions = {
+	min: number
+	max: number
+}
+
+const generateRandomNumber = ({ min, max }: GenerateRandomNumberOptions) =>
 	min +
 	Math.floor(
 		(crypto.getRandomValues(new Uint32Array(1))[0] / (0xffffffff + 1)) *
 			(max - min + 1)
 	)
 
-const generateString = (minLength: number, maxLength?: number) => {
-	const length = generateRandomNumber(minLength, maxLength ?? minLength)
+type GenerateStringOptions = {
+	min: number
+	max?: number
+}
+
+const generateString = ({ min, max }: GenerateStringOptions) => {
+	const length = generateRandomNumber({
+		min,
+		max: max ?? min
+	})
 	return Array.from(
 		{ length },
-		() => syllables[generateRandomNumber(0, syllables.length - 1)]
+		() =>
+			syllables[
+				generateRandomNumber({
+					min: 0,
+					max: syllables.length - 1
+				})
+			]
 	).join("")
 }
 
-export const generateUsername = (minLength: number) => generateString(minLength)
+export const generateUsername = (min: number) => generateString({ min })
 
-export const generateFullName = (minLength: number, maxLength: number) =>
-	`${capitalize(generateString(minLength, maxLength))} ${capitalize(generateString(minLength, maxLength))}`
+type GenerateFullNameOptions = {
+	min: number
+	max: number
+}
 
-type UsernameOptions = {
+export const generateFullName = ({ min, max }: GenerateFullNameOptions) =>
+	`${capitalize(generateString({ min, max }))} ${capitalize(generateString({ min, max }))}`
+
+type GenerateUsernamesOptions = {
 	count: number
 	minLength: number
 }
 
-export const generateUsernames = ({ count, minLength }: UsernameOptions) =>
+export const generateUsernames = ({
+	count,
+	minLength
+}: GenerateUsernamesOptions) =>
 	Array.from({ length: count }, () => generateUsername(minLength))
 
-type FullNameOptions = {
+type GenerateFullNamesOptions = {
 	count: number
-	minLength: number
-	maxLength: number
+	min: number
+	max: number
 }
 
 export const generateFullNames = ({
 	count,
-	minLength,
-	maxLength
-}: FullNameOptions) =>
-	Array.from({ length: count }, () => generateFullName(minLength, maxLength))
+	min,
+	max
+}: GenerateFullNamesOptions) =>
+	Array.from({ length: count }, () => generateFullName({ min, max }))
