@@ -1,5 +1,6 @@
 import "./globals.css"
 import { Providers } from "@/components/providers"
+import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
@@ -33,9 +34,17 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={cn("font-sans", "antialiased", GeistSans.variable, GeistMono.variable)}>
+			<body
+				className={cn(
+					"font-sans",
+					"antialiased",
+					GeistSans.variable,
+					GeistMono.variable
+				)}
+			>
 				<Providers attribute="class" defaultTheme="system" enableSystem>
 					{children}
+					<Toaster />
 				</Providers>
 			</body>
 		</html>
