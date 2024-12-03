@@ -1,5 +1,6 @@
 import "./globals.css"
 import { Providers } from "@/components/providers"
+import { Tabs } from "@/components/tabs"
 import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils"
 import { GeistMono } from "geist/font/mono"
@@ -52,6 +53,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 							"px-4"
 						)}
 					>
+						<div
+							className={cn(
+								"w-full",
+								"flex",
+								"justify-start",
+								"items-center",
+								"my-8"
+							)}
+						>
+							<Tabs />
+						</div>
 						{children}
 					</main>
 					<Toaster />
