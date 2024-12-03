@@ -48,7 +48,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 							"container",
 							"mx-auto",
 							"max-w-screen-sm",
-							"mt-12",
+							"mt-24",
 							"px-4"
 						)}
 					>
