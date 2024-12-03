@@ -1,15 +1,42 @@
+import { Button } from "@/components/ui/button"
 import { generateUsernames } from "@/lib/generate"
+import { cn } from "@/lib/utils"
+import { Copy } from "lucide-react"
+import { revalidatePath } from "next/cache"
 
 export default function Usernames() {
 	const usernames = generateUsernames({ count: 10, minLength: 3 })
 	return (
-		<div>
-			<h1>Usernames</h1>
-			<ul>
+		<div className={cn("flex", "flex-col", "gap-y-8")}>
+			<div className={cn("flex", "flex-col")}>
 				{usernames.map((username) => (
-					<li key={username}>{username}</li>
+					<div
+						key={username}
+						className={cn(
+							"w-full",
+							"flex",
+							"justify-start",
+							"items-center",
+							"gap-x-2"
+						)}
+					>
+						<Button size={"icon"} variant={"ghost"}>
+							<Copy />
+						</Button>
+						<span className={cn("text-lg")}>{username}</span>
+					</div>
 				))}
-			</ul>
+			</div>
+			<Button
+				variant={"ghost"}
+				className={cn("w-fit")}
+				onClick={async () => {
+					"use server"
+					return revalidatePath("/usernames", "page")
+				}}
+			>
+				another
+			</Button>
 		</div>
 	)
 }
