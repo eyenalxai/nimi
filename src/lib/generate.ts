@@ -22,3 +22,24 @@ export const generateUsername = (minLength: number) => generateString(minLength)
 
 export const generateFullName = (minLength: number, maxLength: number) =>
 	`${capitalize(generateString(minLength, maxLength))} ${capitalize(generateString(minLength, maxLength))}`
+
+type UsernameOptions = {
+	count: number
+	minLength: number
+}
+
+export const generateUsernames = ({ count, minLength }: UsernameOptions) =>
+	Array.from({ length: count }, () => generateUsername(minLength))
+
+type FullNameOptions = {
+	count: number
+	minLength: number
+	maxLength: number
+}
+
+export const generateFullNames = ({
+	count,
+	minLength,
+	maxLength
+}: FullNameOptions) =>
+	Array.from({ length: count }, () => generateFullName(minLength, maxLength))
