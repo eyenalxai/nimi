@@ -49,14 +49,11 @@ export const generateFullName = ({ min, max }: GenerateFullNameOptions) =>
 
 type GenerateUsernamesOptions = {
 	count: number
-	minLength: number
+	min: number
 }
 
-export const generateUsernames = ({
-	count,
-	minLength
-}: GenerateUsernamesOptions) =>
-	Array.from({ length: count }, () => generateUsername(minLength))
+export const generateUsernames = ({ count, min }: GenerateUsernamesOptions) =>
+	Array.from({ length: count }, () => generateUsername(min))
 
 type GenerateFullNamesOptions = {
 	count: number
