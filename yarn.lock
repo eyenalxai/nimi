@@ -930,6 +930,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-linux-x64-gnu@npm:^4.24.0":
+  version: 4.28.0
+  resolution: "@rollup/rollup-linux-x64-gnu@npm:4.28.0"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@rtsao/scc@npm:^1.1.0":
   version: 1.1.0
   resolution: "@rtsao/scc@npm:1.1.0"
@@ -3950,6 +3957,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"neverthrow@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "neverthrow@npm:8.1.1"
+  dependencies:
+    "@rollup/rollup-linux-x64-gnu": "npm:^4.24.0"
+  dependenciesMeta:
+    "@rollup/rollup-linux-x64-gnu":
+      optional: true
+  checksum: 10c0/25be561ccf2b551ee811825a2d5525d503c8695f3e76d1b573cf2924faca010d308bfa48cecc2dcad867c6d980b7f1a028aaabf1d06d619a776aa0c239ecf03f
+  languageName: node
+  linkType: hard
+
 "next-themes@npm:^0.4.3":
   version: 0.4.3
   resolution: "next-themes@npm:0.4.3"
@@ -4041,6 +4060,7 @@ __metadata:
     eslint-plugin-tailwindcss: "npm:^3.17.5"
     geist: "npm:^1.3.1"
     lucide-react: "npm:^0.464.0"
+    neverthrow: "npm:^8.1.1"
     next: "npm:^15.0.3"
     next-themes: "npm:^0.4.3"
     postcss: "npm:8.4.49"
