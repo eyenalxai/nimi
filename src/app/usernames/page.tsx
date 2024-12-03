@@ -1,3 +1,4 @@
+import { CopyButton } from "@/components/copy-button"
 import { Button } from "@/components/ui/button"
 import { generateUsernames } from "@/lib/generate"
 import { cn } from "@/lib/utils"
@@ -20,9 +21,10 @@ export default function Usernames() {
 							"gap-x-2"
 						)}
 					>
-						<Button size={"icon"} variant={"ghost"}>
+						<CopyButton text={username} variant={"ghost"} size={"icon"}>
 							<Copy />
-						</Button>
+						</CopyButton>
+
 						<span className={cn("text-lg")}>{username}</span>
 					</div>
 				))}
