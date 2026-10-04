@@ -1,5 +1,9 @@
 import { ModeTabs } from "@/components/mode-tabs"
+import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { Button } from "@/components/ui/button"
 import { Toaster } from "@/components/ui/toast"
+import { themeScript } from "@/lib/theme"
 import {
   HeadContent,
   Link,
@@ -23,43 +27,69 @@ export const Route = createRootRoute({
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),
-  notFoundComponent: () => (
-    <div className="flex flex-col items-start gap-2">
-      <h1 className="text-2xl font-semibold tracking-tight">not found</h1>
-      <p className="text-sm text-muted-foreground">
-        That page doesn&apos;t exist.
-      </p>
-      <Link to="/usernames" className="text-sm underline underline-offset-4">
-        back to usernames
-      </Link>
-    </div>
-  ),
+  notFoundComponent: NotFound,
   shellComponent: RootDocument,
 })
 
+function NotFound() {
+  return (
+    <div className="flex flex-col items-start gap-4">
+      <div className="flex flex-col gap-1">
+        <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
+          404
+        </p>
+        <h1 className="text-2xl font-semibold tracking-tight">nothing here</h1>
+        <p className="text-sm text-muted-foreground">
+          That page doesn&apos;t exist. The names are elsewhere.
+        </p>
+      </div>
+      <Button variant="outline" render={<Link to="/usernames" />}>
+        back to usernames
+      </Button>
+    </div>
+  )
+}
+
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <HeadContent />
       </head>
       <body className="antialiased">
-        <Toaster>
-          <div className="mx-auto flex min-h-svh w-full max-w-md flex-col px-5 py-8 sm:py-12">
-            <header className="flex items-center justify-between">
-              <Link
-                to="/usernames"
-                className="text-sm font-semibold tracking-tight"
-              >
-                nimi
-              </Link>
-              <ModeTabs />
-            </header>
-            <main className="flex flex-1 flex-col justify-center py-10">
-              {children}
-            </main>
-          </div>
-        </Toaster>
+        <ThemeProvider>
+          <Toaster>
+            <div className="mx-auto flex min-h-svh w-full max-w-md flex-col px-5 py-8 sm:py-12">
+              <header className="flex items-center justify-between">
+                <Link
+                  to="/usernames"
+                  className="text-sm font-semibold tracking-tight"
+                >
+                  nimi
+                </Link>
+                <ThemeToggle />
+              </header>
+              <div className="mt-6">
+                <ModeTabs />
+              </div>
+              <main className="flex flex-1 flex-col justify-center py-10">
+                {children}
+              </main>
+              <footer className="text-center text-xs text-muted-foreground">
+                generated on the fly ·{" "}
+                <a
+                  href="https://github.com/eyenalxai/nimi"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                >
+                  source
+                </a>
+              </footer>
+            </div>
+          </Toaster>
+        </ThemeProvider>
         <Scripts />
       </body>
     </html>

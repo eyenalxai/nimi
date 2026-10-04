@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FullnamesRouteImport } from './routes/fullnames'
+import { Route as HealthRouteImport } from './routes/health'
 import { Route as UsernamesRouteImport } from './routes/usernames'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const FullnamesRoute = FullnamesRouteImport.update({
   path: '/fullnames',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HealthRoute = HealthRouteImport.update({
+  id: '/health',
+  path: '/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UsernamesRoute = UsernamesRouteImport.update({
   id: '/usernames',
   path: '/usernames',
@@ -32,30 +38,34 @@ const UsernamesRoute = UsernamesRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/fullnames': typeof FullnamesRoute
+  '/health': typeof HealthRoute
   '/usernames': typeof UsernamesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/fullnames': typeof FullnamesRoute
+  '/health': typeof HealthRoute
   '/usernames': typeof UsernamesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/fullnames': typeof FullnamesRoute
+  '/health': typeof HealthRoute
   '/usernames': typeof UsernamesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/fullnames' | '/usernames'
+  fullPaths: '/' | '/fullnames' | '/health' | '/usernames'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/fullnames' | '/usernames'
-  id: '__root__' | '/' | '/fullnames' | '/usernames'
+  to: '/' | '/fullnames' | '/health' | '/usernames'
+  id: '__root__' | '/' | '/fullnames' | '/health' | '/usernames'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FullnamesRoute: typeof FullnamesRoute
+  HealthRoute: typeof HealthRoute
   UsernamesRoute: typeof UsernamesRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FullnamesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/health': {
+      id: '/health'
+      path: '/health'
+      fullPath: '/health'
+      preLoaderRoute: typeof HealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/usernames': {
       id: '/usernames'
       path: '/usernames'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FullnamesRoute: FullnamesRoute,
+  HealthRoute: HealthRoute,
   UsernamesRoute: UsernamesRoute,
 }
 export const routeTree = rootRouteImport
