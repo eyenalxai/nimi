@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FullnamesRouteImport } from './routes/fullnames'
+import { Route as UsernamesRouteImport } from './routes/usernames'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FullnamesRoute = FullnamesRouteImport.update({
+  id: '/fullnames',
+  path: '/fullnames',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsernamesRoute = UsernamesRouteImport.update({
+  id: '/usernames',
+  path: '/usernames',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/fullnames': typeof FullnamesRoute
+  '/usernames': typeof UsernamesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/fullnames': typeof FullnamesRoute
+  '/usernames': typeof UsernamesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/fullnames': typeof FullnamesRoute
+  '/usernames': typeof UsernamesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/fullnames' | '/usernames'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/fullnames' | '/usernames'
+  id: '__root__' | '/' | '/fullnames' | '/usernames'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FullnamesRoute: typeof FullnamesRoute
+  UsernamesRoute: typeof UsernamesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fullnames': {
+      id: '/fullnames'
+      path: '/fullnames'
+      fullPath: '/fullnames'
+      preLoaderRoute: typeof FullnamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/usernames': {
+      id: '/usernames'
+      path: '/usernames'
+      fullPath: '/usernames'
+      preLoaderRoute: typeof UsernamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FullnamesRoute: FullnamesRoute,
+  UsernamesRoute: UsernamesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
