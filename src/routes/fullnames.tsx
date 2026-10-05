@@ -1,27 +1,16 @@
+import { createFileRoute, getRouteApi } from "@tanstack/react-router"
+
 import { Generator } from "@/components/generator"
 import { generateFullNames } from "@/lib/generate"
-import { createFileRoute } from "@tanstack/react-router"
 
 const COUNT = 10
 const MIN = 1
 const MAX = 4
 
-export const Route = createFileRoute("/fullnames")({
-  head: () => ({
-    meta: [
-      { title: "full names — nimi" },
-      {
-        name: "description",
-        content: "Ten freshly generated full names. Another ten whenever you want.",
-      },
-    ],
-  }),
-  loader: () => ({ names: generateFullNames({ count: COUNT, min: MIN, max: MAX }) }),
-  component: FullnamesRoute,
-})
+const routeApi = getRouteApi("/fullnames")
 
-function FullnamesRoute() {
-  const { names } = Route.useLoaderData()
+const FullnamesRoute = () => {
+  const { names } = routeApi.useLoaderData()
 
   return (
     <Generator
@@ -31,3 +20,23 @@ function FullnamesRoute() {
     />
   )
 }
+
+const Route = createFileRoute("/fullnames")({
+  head: () => {
+    return {
+      meta: [
+        { title: "full names — nimi" },
+        {
+          name: "description",
+          content: "Ten freshly generated full names. Another ten whenever you want.",
+        },
+      ],
+    }
+  },
+  loader: () => {
+    return { names: generateFullNames({ count: COUNT, min: MIN, max: MAX }) }
+  },
+  component: FullnamesRoute,
+})
+
+export { Route }

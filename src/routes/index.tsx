@@ -1,7 +1,9 @@
 import { createFileRoute, redirect } from "@tanstack/react-router"
 
-export const Route = createFileRoute("/")({
+const Route = createFileRoute("/")({
   beforeLoad: () => {
     throw redirect({ to: "/usernames" })
   },
 })
+
+export { Route }

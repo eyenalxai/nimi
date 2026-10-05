@@ -1,91 +1,69 @@
-import { syllables } from "./syllables"
+import { syllables } from "@/lib/syllables"
 
-export type RandomSource = () => number
+type RandomSource = () => number
 
-/**
- * Default randomness source. Works in the browser and in Bun/Node because
- * `crypto.getRandomValues` is a global web-standard API.
- */
+type GenerateUsernameOptions = {
+  min: number
+  random?: RandomSource
+}
+
+type GenerateUsernamesOptions = {
+  count: number
+  min: number
+  random?: RandomSource
+}
+
+type GenerateFullNameOptions = {
+  min: number
+  max: number
+  random?: RandomSource
+}
+
+type GenerateFullNamesOptions = {
+  count: number
+  min: number
+  max: number
+  random?: RandomSource
+}
+
 const cryptoRandom: RandomSource = () => {
   const [value] = crypto.getRandomValues(new Uint32Array(1))
-  return value / 0x1_0000_0000
+  return value / 0x1_00_00_00_00
 }
 
-export const capitalize = (value: string) =>
-  value.charAt(0).toUpperCase() + value.slice(1)
+const capitalize = (value: string) => value.charAt(0).toUpperCase() + value.slice(1)
 
-type RandomIntOptions = {
-  min: number
-  max: number
-}
-
-const randomInt = (random: RandomSource, { min, max }: RandomIntOptions) =>
+const randomInt = (random: RandomSource, min: number, max: number) =>
   min + Math.floor(random() * (max - min + 1))
 
-type GenerateStringOptions = {
-  min: number
-  max?: number
-  random: RandomSource
+const generateString = (random: RandomSource, min: number, max: number) => {
+  const length = randomInt(random, min, max)
+  return Array.from({ length }, () => syllables[randomInt(random, 0, syllables.length - 1)]).join(
+    "",
+  )
 }
 
-const generateString = ({ min, max, random }: GenerateStringOptions) => {
-  const length = randomInt(random, { min, max: max ?? min })
-  return Array.from(
-    { length },
-    () =>
-      syllables[randomInt(random, { min: 0, max: syllables.length - 1 })]
-  ).join("")
-}
+const generateUsername = ({ min, random = cryptoRandom }: GenerateUsernameOptions) =>
+  generateString(random, min, min)
 
-export type GenerateUsernameOptions = {
-  min: number
-  random?: RandomSource
-}
-
-export type GenerateUsernamesOptions = {
-  count: number
-  min: number
-  random?: RandomSource
-}
-
-export type GenerateFullNameOptions = {
-  min: number
-  max: number
-  random?: RandomSource
-}
-
-export type GenerateFullNamesOptions = {
-  count: number
-  min: number
-  max: number
-  random?: RandomSource
-}
-
-export const generateUsername = ({
-  min,
-  random = cryptoRandom,
-}: GenerateUsernameOptions) => generateString({ min, random })
-
-export const generateUsernames = ({
-  count,
-  min,
-  random = cryptoRandom,
-}: GenerateUsernamesOptions) =>
+const generateUsernames = ({ count, min, random = cryptoRandom }: GenerateUsernamesOptions) =>
   Array.from({ length: count }, () => generateUsername({ min, random }))
 
-export const generateFullName = ({
-  min,
-  max,
-  random = cryptoRandom,
-}: GenerateFullNameOptions) =>
-  `${capitalize(generateString({ min, max, random }))} ${capitalize(
-    generateString({ min, max, random })
-  )}`
+const generateFullName = ({ min, max, random = cryptoRandom }: GenerateFullNameOptions) =>
+  `${capitalize(generateString(random, min, max))} ${capitalize(generateString(random, min, max))}`
 
-export const generateFullNames = ({
-  count,
-  min,
-  max,
-  random = cryptoRandom,
-}: GenerateFullNamesOptions) =>
+const generateFullNames = ({ count, min, max, random = cryptoRandom }: GenerateFullNamesOptions) =>
   Array.from({ length: count }, () => generateFullName({ min, max, random }))
+
+export {
+  capitalize,
+  generateFullName,
+  generateFullNames,
+  generateUsername,
+  generateUsernames,
+  type GenerateFullNameOptions,
+  type GenerateFullNamesOptions,
+  type GenerateUsernameOptions,
+  type GenerateUsernamesOptions,
+  type RandomSource,
+}

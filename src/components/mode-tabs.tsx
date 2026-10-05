@@ -18,7 +18,7 @@ export const ModeTabs = () => (
         className={cn(
           "rounded-md px-2.5 py-1 text-center text-xs font-medium text-muted-foreground transition-colors",
           "hover:text-foreground",
-          "data-[status=active]:bg-background data-[status=active]:text-foreground data-[status=active]:shadow-sm"
+          "data-[status=active]:bg-background data-[status=active]:text-foreground data-[status=active]:shadow-sm",
         )}
       >
         {mode.label}

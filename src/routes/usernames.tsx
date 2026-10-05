@@ -1,26 +1,15 @@
+import { createFileRoute, getRouteApi } from "@tanstack/react-router"
+
 import { Generator } from "@/components/generator"
 import { generateUsernames } from "@/lib/generate"
-import { createFileRoute } from "@tanstack/react-router"
 
 const COUNT = 10
 const MIN = 3
 
-export const Route = createFileRoute("/usernames")({
-  head: () => ({
-    meta: [
-      { title: "usernames — nimi" },
-      {
-        name: "description",
-        content: "Ten freshly generated usernames. Another ten whenever you want.",
-      },
-    ],
-  }),
-  loader: () => ({ names: generateUsernames({ count: COUNT, min: MIN }) }),
-  component: UsernamesRoute,
-})
+const routeApi = getRouteApi("/usernames")
 
-function UsernamesRoute() {
-  const { names } = Route.useLoaderData()
+const UsernamesRoute = () => {
+  const { names } = routeApi.useLoaderData()
 
   return (
     <Generator
@@ -30,3 +19,23 @@ function UsernamesRoute() {
     />
   )
 }
+
+const Route = createFileRoute("/usernames")({
+  head: () => {
+    return {
+      meta: [
+        { title: "usernames — nimi" },
+        {
+          name: "description",
+          content: "Ten freshly generated usernames. Another ten whenever you want.",
+        },
+      ],
+    }
+  },
+  loader: () => {
+    return { names: generateUsernames({ count: COUNT, min: MIN }) }
+  },
+  component: UsernamesRoute,
+})
+
+export { Route }

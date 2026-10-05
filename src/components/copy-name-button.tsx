@@ -1,14 +1,15 @@
+import { CheckIcon, CopyIcon } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/toast"
 import { copyToClipboard } from "@/lib/clipboard"
-import { CheckIcon, CopyIcon } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
 
 type CopyNameButtonProps = {
   name: string
 }
 
-export const CopyNameButton = ({ name }: CopyNameButtonProps) => {
+const CopyNameButton = ({ name }: CopyNameButtonProps) => {
   const [copied, setCopied] = useState(false)
   const resetTimer = useRef<number | null>(null)
 
@@ -18,7 +19,7 @@ export const CopyNameButton = ({ name }: CopyNameButtonProps) => {
         window.clearTimeout(resetTimer.current)
       }
     },
-    []
+    [],
   )
 
   const handleCopy = async () => {
@@ -35,7 +36,9 @@ export const CopyNameButton = ({ name }: CopyNameButtonProps) => {
 
     setCopied(true)
     toast.add({ title: "copied", description: name, type: "success" })
-    resetTimer.current = window.setTimeout(() => setCopied(false), 1500)
+    resetTimer.current = window.setTimeout(() => {
+      setCopied(false)
+    }, 1500)
   }
 
   return (
@@ -44,9 +47,13 @@ export const CopyNameButton = ({ name }: CopyNameButtonProps) => {
       size="icon-sm"
       className="text-muted-foreground hover:text-foreground"
       aria-label={`copy ${name}`}
-      onClick={handleCopy}
+      onClick={() => {
+        void handleCopy()
+      }}
     >
       {copied ? <CheckIcon aria-hidden="true" /> : <CopyIcon aria-hidden="true" />}
     </Button>
   )
 }
+
+export { CopyNameButton }
