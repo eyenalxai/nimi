@@ -1,4 +1,5 @@
 import { MoonIcon, SunIcon } from "lucide-react"
+import { AnimatePresence, motion } from "motion/react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -9,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useTheme } from "@/hooks/use-theme"
+import { iconTransition, iconVariants } from "@/lib/icon-motion"
 import { isTheme } from "@/lib/theme"
 
 const ThemeToggle = () => {
@@ -26,11 +28,23 @@ const ThemeToggle = () => {
           />
         }
       >
-        {resolvedTheme === "dark" ? (
-          <MoonIcon aria-hidden="true" />
-        ) : (
-          <SunIcon aria-hidden="true" />
-        )}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={resolvedTheme}
+            className="grid place-items-center"
+            variants={iconVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={iconTransition}
+          >
+            {resolvedTheme === "dark" ? (
+              <MoonIcon aria-hidden="true" />
+            ) : (
+              <SunIcon aria-hidden="true" />
+            )}
+          </motion.span>
+        </AnimatePresence>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-28">
         <DropdownMenuRadioGroup

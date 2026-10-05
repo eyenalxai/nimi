@@ -3,6 +3,7 @@ import type { ReactNode } from "react"
 import { HeadContent, Link, Scripts, createRootRoute } from "@tanstack/react-router"
 import { createMiddleware } from "@tanstack/react-start"
 import { evlogErrorHandler } from "evlog/nitro/v3"
+import { MotionConfig } from "motion/react"
 
 import { ModeTabs } from "@/components/mode-tabs"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -32,31 +33,33 @@ const RootDocument = ({ children }: { children: ReactNode }) => (
       <HeadContent />
     </head>
     <body className="antialiased">
-      <Toaster>
-        <div className="mx-auto flex min-h-svh w-full max-w-md flex-col px-5 py-8 sm:py-12">
-          <header className="flex items-center justify-between">
-            <Link to="/usernames" className="text-sm font-semibold tracking-tight">
-              nimi
-            </Link>
-            <ThemeToggle />
-          </header>
-          <div className="mt-6">
-            <ModeTabs />
+      <MotionConfig reducedMotion="user">
+        <Toaster>
+          <div className="mx-auto flex min-h-svh w-full max-w-md flex-col px-5 py-8 sm:py-12">
+            <header className="flex items-center justify-between">
+              <Link to="/usernames" className="text-sm font-semibold tracking-tight">
+                nimi
+              </Link>
+              <ThemeToggle />
+            </header>
+            <div className="mt-6">
+              <ModeTabs />
+            </div>
+            <main className="flex flex-1 flex-col justify-center py-10">{children}</main>
+            <footer className="text-center text-xs text-muted-foreground">
+              generated on the fly ·{" "}
+              <a
+                href="https://github.com/eyenalxai/nimi"
+                target="_blank"
+                rel="noreferrer"
+                className="underline-offset-4 transition-colors hover:text-foreground hover:underline"
+              >
+                source
+              </a>
+            </footer>
           </div>
-          <main className="flex flex-1 flex-col justify-center py-10">{children}</main>
-          <footer className="text-center text-xs text-muted-foreground">
-            generated on the fly ·{" "}
-            <a
-              href="https://github.com/eyenalxai/nimi"
-              target="_blank"
-              rel="noreferrer"
-              className="underline-offset-4 transition-colors hover:text-foreground hover:underline"
-            >
-              source
-            </a>
-          </footer>
-        </div>
-      </Toaster>
+        </Toaster>
+      </MotionConfig>
       <Scripts />
     </body>
   </html>

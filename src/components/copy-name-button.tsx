@@ -1,9 +1,11 @@
 import { CheckIcon, CopyIcon } from "lucide-react"
+import { AnimatePresence, motion } from "motion/react"
 import { useEffect, useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/toast"
 import { copyToClipboard } from "@/lib/clipboard"
+import { iconTransition, iconVariants } from "@/lib/icon-motion"
 
 type CopyNameButtonProps = {
   name: string
@@ -51,7 +53,19 @@ const CopyNameButton = ({ name }: CopyNameButtonProps) => {
         void handleCopy()
       }}
     >
-      {copied ? <CheckIcon aria-hidden="true" /> : <CopyIcon aria-hidden="true" />}
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={copied ? "check" : "copy"}
+          className="grid place-items-center"
+          variants={iconVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          transition={iconTransition}
+        >
+          {copied ? <CheckIcon aria-hidden="true" /> : <CopyIcon aria-hidden="true" />}
+        </motion.span>
+      </AnimatePresence>
     </Button>
   )
 }
