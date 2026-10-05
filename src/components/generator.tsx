@@ -55,7 +55,7 @@ const spinVariants: Variants = {
   },
 }
 
-const tapFeedback = { scale: 0.97 }
+const tapFeedback = { scale: 0.96 }
 
 const withIds = (names: string[]): GeneratedName[] =>
   names.map((name) => {

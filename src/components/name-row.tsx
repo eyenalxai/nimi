@@ -1,16 +1,29 @@
+import type { Transition, Variants } from "motion/react"
+
 import { CheckIcon, CopyIcon } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 import { useEffect, useRef, useState } from "react"
 
 import { toast } from "@/components/ui/toast"
 import { copyToClipboard } from "@/lib/clipboard"
-import { iconTransition, iconVariants } from "@/lib/icon-motion"
 
 type NameRowProps = {
   name: string
 }
 
 const COPIED_RESET_MS = 1500
+
+const iconTransition: Transition = {
+  type: "spring",
+  duration: 0.3,
+  bounce: 0,
+}
+
+const iconVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0.9 },
+}
 
 const NameRow = ({ name }: NameRowProps) => {
   const [copied, setCopied] = useState(false)
@@ -50,17 +63,17 @@ const NameRow = ({ name }: NameRowProps) => {
       onClick={() => {
         void handleCopy()
       }}
-      className="group flex h-11 w-full cursor-pointer items-center justify-between gap-4 text-left transition-colors outline-none select-none hover:bg-muted/60 focus-visible:bg-muted focus-visible:ring-2 focus-visible:ring-ring/60 active:bg-muted"
+      className="group flex h-11 w-full cursor-pointer items-center justify-between gap-4 px-3 text-left transition-colors outline-none select-none hover:bg-muted/60 focus-visible:bg-muted focus-visible:ring-2 focus-visible:ring-ring/60 active:bg-muted"
     >
       <span className="min-w-0 truncate text-sm font-medium tracking-tight">{name}</span>
       <span
         aria-hidden="true"
-        className="grid size-4 shrink-0 place-items-center text-muted-foreground transition-colors group-hover:text-foreground"
+        className="relative grid size-4 shrink-0 place-items-center text-muted-foreground transition-colors group-hover:text-foreground"
       >
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence initial={false}>
           <motion.span
             key={copied ? "check" : "copy"}
-            className="grid place-items-center"
+            className="absolute inset-0 grid place-items-center"
             variants={iconVariants}
             initial="hidden"
             animate="visible"
