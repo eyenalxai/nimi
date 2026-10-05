@@ -1,6 +1,8 @@
 import type { ReactNode } from "react"
 
 import { HeadContent, Link, Scripts, createRootRoute } from "@tanstack/react-router"
+import { createMiddleware } from "@tanstack/react-start"
+import { evlogErrorHandler } from "evlog/nitro/v3"
 
 import { ModeTabs } from "@/components/mode-tabs"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -61,6 +63,9 @@ const RootDocument = ({ children }: { children: ReactNode }) => (
 )
 
 const Route = createRootRoute({
+  server: {
+    middleware: [createMiddleware().server(evlogErrorHandler)],
+  },
   head: () => {
     return {
       meta: [
