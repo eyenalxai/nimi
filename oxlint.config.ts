@@ -153,21 +153,6 @@ const ignorePatterns = [
 
 const overrides: OverridesConfig = [
   {
-    files: ["src/lib/syllables.ts"],
-    rules: {
-      // Static data corpus: one syllable per line is the readable form.
-      "max-lines": "off",
-    },
-  },
-  {
-    files: ["src/router.tsx"],
-    rules: {
-      // `Register` is declaration-merged with TanStack Start's augmentations;
-      // only an interface can merge, a type alias collides with them.
-      "typescript/consistent-type-definitions": "off",
-    },
-  },
-  {
     files: ["src/routes/**/*.{ts,tsx}"],
     rules: {
       // TanStack Router redirects are thrown control-flow values, not Errors.
