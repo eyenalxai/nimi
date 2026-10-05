@@ -8,58 +8,58 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as FullnamesRouteImport } from './routes/fullnames'
-import { Route as HealthRouteImport } from './routes/health'
-import { Route as UsernamesRouteImport } from './routes/usernames'
+import { Route as rootRouteImport } from "./routes/__root"
+import { Route as FullnamesRouteImport } from "./routes/fullnames"
+import { Route as HealthRouteImport } from "./routes/health"
+import { Route as IndexRouteImport } from "./routes/index"
+import { Route as UsernamesRouteImport } from "./routes/usernames"
 
 const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => rootRouteImport,
 } as any)
 const FullnamesRoute = FullnamesRouteImport.update({
-  id: '/fullnames',
-  path: '/fullnames',
+  id: "/fullnames",
+  path: "/fullnames",
   getParentRoute: () => rootRouteImport,
 } as any)
 const HealthRoute = HealthRouteImport.update({
-  id: '/health',
-  path: '/health',
+  id: "/health",
+  path: "/health",
   getParentRoute: () => rootRouteImport,
 } as any)
 const UsernamesRoute = UsernamesRouteImport.update({
-  id: '/usernames',
-  path: '/usernames',
+  id: "/usernames",
+  path: "/usernames",
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/fullnames': typeof FullnamesRoute
-  '/health': typeof HealthRoute
-  '/usernames': typeof UsernamesRoute
+  "/": typeof IndexRoute
+  "/fullnames": typeof FullnamesRoute
+  "/health": typeof HealthRoute
+  "/usernames": typeof UsernamesRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/fullnames': typeof FullnamesRoute
-  '/health': typeof HealthRoute
-  '/usernames': typeof UsernamesRoute
+  "/": typeof IndexRoute
+  "/fullnames": typeof FullnamesRoute
+  "/health": typeof HealthRoute
+  "/usernames": typeof UsernamesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/fullnames': typeof FullnamesRoute
-  '/health': typeof HealthRoute
-  '/usernames': typeof UsernamesRoute
+  "/": typeof IndexRoute
+  "/fullnames": typeof FullnamesRoute
+  "/health": typeof HealthRoute
+  "/usernames": typeof UsernamesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/fullnames' | '/health' | '/usernames'
+  fullPaths: "/" | "/fullnames" | "/health" | "/usernames"
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/fullnames' | '/health' | '/usernames'
-  id: '__root__' | '/' | '/fullnames' | '/health' | '/usernames'
+  to: "/" | "/fullnames" | "/health" | "/usernames"
+  id: "__root__" | "/" | "/fullnames" | "/health" | "/usernames"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -69,33 +69,33 @@ export interface RootRouteChildren {
   UsernamesRoute: typeof UsernamesRoute
 }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
+    "/": {
+      id: "/"
+      path: "/"
+      fullPath: "/"
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/fullnames': {
-      id: '/fullnames'
-      path: '/fullnames'
-      fullPath: '/fullnames'
+    "/fullnames": {
+      id: "/fullnames"
+      path: "/fullnames"
+      fullPath: "/fullnames"
       preLoaderRoute: typeof FullnamesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/health': {
-      id: '/health'
-      path: '/health'
-      fullPath: '/health'
+    "/health": {
+      id: "/health"
+      path: "/health"
+      fullPath: "/health"
       preLoaderRoute: typeof HealthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/usernames': {
-      id: '/usernames'
-      path: '/usernames'
-      fullPath: '/usernames'
+    "/usernames": {
+      id: "/usernames"
+      path: "/usernames"
+      fullPath: "/usernames"
       preLoaderRoute: typeof UsernamesRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -112,9 +112,10 @@ export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
+import type { createStart } from "@tanstack/react-start"
+
+import type { getRouter } from "./router.tsx"
+declare module "@tanstack/react-start" {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
