@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/toast"
 import appCss from "@/styles.css?url"
 
 const NotFound = () => (
-  <div className="flex flex-col items-start gap-5">
+  <div className="flex flex-col items-start gap-5 pt-8">
     <div className="flex flex-col gap-1.5">
       <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">404</p>
       <h1 className="text-2xl font-semibold tracking-tight">nothing here</h1>
@@ -35,14 +35,14 @@ const RootDocument = ({ children }: { children: ReactNode }) => (
     <body className="antialiased">
       <MotionConfig reducedMotion="user">
         <Toaster>
-          <div className="mx-auto flex min-h-svh w-full max-w-xs flex-col px-4">
+          <div className="mx-auto flex w-full max-w-sm flex-col px-4 pb-10">
             <header className="flex h-12 items-center justify-between">
               <Link to="/usernames" className="text-sm font-semibold tracking-tight">
                 nimi
               </Link>
               <ModeTabs />
             </header>
-            <main className="flex flex-1 flex-col justify-center py-6">{children}</main>
+            <main>{children}</main>
           </div>
         </Toaster>
       </MotionConfig>
