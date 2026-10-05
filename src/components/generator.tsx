@@ -72,28 +72,32 @@ const Generator = ({ title, initialNames, generate }: GeneratorProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-3">
       <h1 className="sr-only">{title}</h1>
-      <ul className="relative flex flex-col">
-        <AnimatePresence mode="popLayout">
-          {names.map((item, index) => (
-            <motion.li
-              key={item.id}
-              custom={index}
-              variants={rowVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="group flex items-center justify-between gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-muted/60"
-            >
-              <span className="min-w-0 truncate text-lg tracking-tight">{item.name}</span>
-              <CopyNameButton name={item.name} />
-            </motion.li>
-          ))}
-        </AnimatePresence>
-      </ul>
+      <div className="surface rounded-2xl bg-card p-2">
+        <ul className="relative flex flex-col gap-0.5">
+          <AnimatePresence mode="popLayout">
+            {names.map((item, index) => (
+              <motion.li
+                key={item.id}
+                custom={index}
+                variants={rowVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="group flex h-12 items-center justify-between gap-4 rounded-lg px-3.5 transition-colors hover:bg-muted"
+              >
+                <span className="min-w-0 truncate text-base font-medium tracking-tight">
+                  {item.name}
+                </span>
+                <CopyNameButton name={item.name} />
+              </motion.li>
+            ))}
+          </AnimatePresence>
+        </ul>
+      </div>
       <motion.div className="w-full" whileTap={tapFeedback}>
-        <Button variant="outline" size="lg" className="w-full" onClick={regenerate}>
+        <Button size="lg" className="h-11 w-full" onClick={regenerate}>
           <motion.span
             className="grid place-items-center"
             custom={rotation}

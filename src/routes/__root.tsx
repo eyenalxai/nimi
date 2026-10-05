@@ -6,15 +6,13 @@ import { evlogErrorHandler } from "evlog/nitro/v3"
 import { MotionConfig } from "motion/react"
 
 import { ModeTabs } from "@/components/mode-tabs"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { Toaster } from "@/components/ui/toast"
-import { themeScript } from "@/lib/theme"
 import appCss from "@/styles.css?url"
 
 const NotFound = () => (
-  <div className="flex flex-col items-start gap-4">
-    <div className="flex flex-col gap-1">
+  <div className="flex flex-col items-start gap-5">
+    <div className="flex flex-col gap-1.5">
       <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">404</p>
       <h1 className="text-2xl font-semibold tracking-tight">nothing here</h1>
       <p className="text-sm text-muted-foreground">
@@ -28,26 +26,25 @@ const NotFound = () => (
 )
 
 const RootDocument = ({ children }: { children: ReactNode }) => (
-  <html lang="en" suppressHydrationWarning>
+  <html lang="en">
     <head>
       <HeadContent />
+      <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+      <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
     </head>
     <body className="antialiased">
       <MotionConfig reducedMotion="user">
         <Toaster>
-          <div className="mx-auto flex min-h-svh w-full max-w-md flex-col px-5 py-8 sm:py-12">
-            <header className="flex items-center justify-between">
+          <div className="mx-auto flex min-h-svh w-full max-w-md flex-col px-6">
+            <header className="flex h-16 items-center justify-between">
               <Link to="/usernames" className="text-sm font-semibold tracking-tight">
                 nimi
               </Link>
-              <ThemeToggle />
-            </header>
-            <div className="mt-6">
               <ModeTabs />
-            </div>
-            <main className="flex flex-1 flex-col justify-center py-10">{children}</main>
-            <footer className="text-center text-xs text-muted-foreground">
-              generated on the fly ·{" "}
+            </header>
+            <main className="flex flex-1 flex-col pt-8 sm:pt-12">{children}</main>
+            <footer className="flex items-center justify-between py-6 text-xs text-muted-foreground">
+              <p>generated on the fly</p>
               <a
                 href="https://github.com/eyenalxai/nimi"
                 target="_blank"
@@ -81,7 +78,6 @@ const Route = createRootRoute({
         },
       ],
       links: [{ rel: "stylesheet", href: appCss }],
-      scripts: [{ children: themeScript }],
     }
   },
   notFoundComponent: NotFound,

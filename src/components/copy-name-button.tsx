@@ -46,8 +46,8 @@ const CopyNameButton = ({ name }: CopyNameButtonProps) => {
   return (
     <Button
       variant="ghost"
-      size="icon-sm"
-      className="text-muted-foreground hover:text-foreground"
+      size="icon"
+      className="text-muted-foreground/60 hover:bg-transparent hover:text-foreground group-hover:text-foreground"
       aria-label={`copy ${name}`}
       onClick={() => {
         void handleCopy()

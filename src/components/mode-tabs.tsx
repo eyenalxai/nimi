@@ -21,7 +21,7 @@ const ModeTabs = () => {
   })
 
   return (
-    <nav aria-label="generator mode" className="grid grid-cols-2 gap-1 rounded-lg bg-muted p-1">
+    <nav aria-label="generator mode" className="flex items-center rounded-lg bg-muted p-0.5">
       {MODES.map((mode) => {
         const isActive = pathname === mode.to
         return (
@@ -29,7 +29,7 @@ const ModeTabs = () => {
             key={mode.to}
             to={mode.to}
             className={cn(
-              "relative rounded-md px-2.5 py-1 text-center text-xs font-medium text-muted-foreground transition-colors hover:text-foreground",
+              "relative flex h-8 items-center rounded-md px-3 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground",
               isActive && "text-foreground",
             )}
           >
