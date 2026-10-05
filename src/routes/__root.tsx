@@ -35,25 +35,14 @@ const RootDocument = ({ children }: { children: ReactNode }) => (
     <body className="antialiased">
       <MotionConfig reducedMotion="user">
         <Toaster>
-          <div className="mx-auto flex min-h-svh w-full max-w-md flex-col px-6">
-            <header className="flex h-16 items-center justify-between">
+          <div className="mx-auto flex min-h-svh w-full max-w-xs flex-col px-4">
+            <header className="flex h-12 items-center justify-between">
               <Link to="/usernames" className="text-sm font-semibold tracking-tight">
                 nimi
               </Link>
               <ModeTabs />
             </header>
-            <main className="flex flex-1 flex-col pt-8 sm:pt-12">{children}</main>
-            <footer className="flex items-center justify-between py-6 text-xs text-muted-foreground">
-              <p>generated on the fly</p>
-              <a
-                href="https://github.com/eyenalxai/nimi"
-                target="_blank"
-                rel="noreferrer"
-                className="underline-offset-4 transition-colors hover:text-foreground hover:underline"
-              >
-                source
-              </a>
-            </footer>
+            <main className="flex flex-1 flex-col justify-center py-6">{children}</main>
           </div>
         </Toaster>
       </MotionConfig>

@@ -11,6 +11,8 @@ type CopyNameButtonProps = {
   name: string
 }
 
+const COPIED_RESET_MS = 1500
+
 const CopyNameButton = ({ name }: CopyNameButtonProps) => {
   const [copied, setCopied] = useState(false)
   const resetTimer = useRef<number | null>(null)
@@ -37,17 +39,16 @@ const CopyNameButton = ({ name }: CopyNameButtonProps) => {
     }
 
     setCopied(true)
-    toast.add({ title: "copied", description: name, type: "success" })
     resetTimer.current = window.setTimeout(() => {
       setCopied(false)
-    }, 1500)
+    }, COPIED_RESET_MS)
   }
 
   return (
     <Button
       variant="ghost"
-      size="icon"
-      className="text-muted-foreground/60 hover:bg-transparent hover:text-foreground group-hover:text-foreground"
+      size="icon-sm"
+      className="cursor-pointer text-muted-foreground"
       aria-label={`copy ${name}`}
       onClick={() => {
         void handleCopy()

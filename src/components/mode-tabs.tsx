@@ -29,7 +29,7 @@ const ModeTabs = () => {
             key={mode.to}
             to={mode.to}
             className={cn(
-              "relative flex h-8 items-center rounded-md px-3 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground",
+              "relative flex h-7 items-center rounded-md px-2.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground",
               isActive && "text-foreground",
             )}
           >

@@ -72,10 +72,10 @@ const Generator = ({ title, initialNames, generate }: GeneratorProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-1.5">
       <h1 className="sr-only">{title}</h1>
-      <div className="surface rounded-2xl bg-card p-2">
-        <ul className="relative flex flex-col gap-0.5">
+      <div className="surface rounded-lg bg-card p-1">
+        <ul className="relative flex flex-col divide-y divide-border/60">
           <AnimatePresence mode="popLayout">
             {names.map((item, index) => (
               <motion.li
@@ -85,9 +85,9 @@ const Generator = ({ title, initialNames, generate }: GeneratorProps) => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="group flex h-12 items-center justify-between gap-4 rounded-lg px-3.5 transition-colors hover:bg-muted"
+                className="flex h-9 items-center justify-between gap-3 px-2.5"
               >
-                <span className="min-w-0 truncate text-base font-medium tracking-tight">
+                <span className="min-w-0 truncate text-sm font-medium tracking-tight">
                   {item.name}
                 </span>
                 <CopyNameButton name={item.name} />
@@ -97,7 +97,7 @@ const Generator = ({ title, initialNames, generate }: GeneratorProps) => {
         </ul>
       </div>
       <motion.div className="w-full" whileTap={tapFeedback}>
-        <Button size="lg" className="h-11 w-full" onClick={regenerate}>
+        <Button size="lg" className="w-full" onClick={regenerate}>
           <motion.span
             className="grid place-items-center"
             custom={rotation}
