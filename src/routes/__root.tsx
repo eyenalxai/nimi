@@ -36,10 +36,7 @@ const RootDocument = ({ children }: { children: ReactNode }) => (
       <MotionConfig reducedMotion="user">
         <Toaster>
           <div className="mx-auto flex w-full max-w-sm flex-col px-4 pb-10">
-            <header className="flex h-12 items-center justify-between">
-              <Link to="/usernames" className="text-sm font-semibold tracking-tight">
-                nimi
-              </Link>
+            <header className="flex h-12 items-center">
               <ModeTabs />
             </header>
             <main>{children}</main>
