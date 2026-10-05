@@ -149,6 +149,7 @@ const ignorePatterns = [
   "**/tsconfig.tsbuildinfo",
   "src/routeTree.gen.ts",
   "src/components/ui/**",
+  ".railway/**",
 ]
 
 const overrides: OverridesConfig = [
