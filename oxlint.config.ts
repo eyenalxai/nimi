@@ -5,7 +5,6 @@ import { defineConfig } from "oxlint"
 type PluginConfig = NonNullable<OxlintConfig["plugins"]>
 type RuleConfig = NonNullable<OxlintConfig["rules"]>
 type SettingsConfig = NonNullable<OxlintConfig["settings"]>
-type OverridesConfig = NonNullable<OxlintConfig["overrides"]>
 
 const plugins: PluginConfig = [
   "typescript",
@@ -152,16 +151,6 @@ const ignorePatterns = [
   ".railway/**",
 ]
 
-const overrides: OverridesConfig = [
-  {
-    files: ["src/routes/**/*.{ts,tsx}"],
-    rules: {
-      // TanStack Router redirects are thrown control-flow values, not Errors.
-      "typescript/only-throw-error": "off",
-    },
-  },
-]
-
 export default defineConfig({
   plugins,
   categories,
@@ -169,7 +158,6 @@ export default defineConfig({
     ...baseRules,
     ...frontendRules,
   },
-  overrides,
   env: {
     builtin: true,
   },
